@@ -53,6 +53,18 @@
 					<?php
 						echo $user_to_read[0];
 					?>
+					<?
+						$Sql = "SELECT * FROM `session` WHERE `IdUser` = {$_SESSION["user"]} order by 'DateStart' DESC";
+						$query = $mysqli->query($Sql);
+						if ($query->num_rows>1) {
+							$read = $query->fetch_assoc();
+							$read = $query->fetch_assoc();
+							$TimeEnd = strtotime($read["DateNow"]);
+							$TimeNow=time();
+							$TimeDelta = round(($TimeNow - $TimeEnd)/60);
+							echo "<br> Последняя активная сессия - ".$TimeDelta." минут назад";
+						} 
+					?>
 				</div>
 			
 				<div class="footer">
